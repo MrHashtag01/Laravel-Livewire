@@ -117,10 +117,14 @@ class Posts extends Component
     public function delete()
     {
         
-        Post::find($this->deleteId);
-
-        session()->flash('message', 'Post Deleted Successfully.');
-
+        if ($this->deleteId) {
+            $post = Post::find($this->deleteId);
+            if ($post) {
+                $post->delete();
+                session()->flash('message', 'Post Deleted Successfully.');
+            }
+        }
+        $this->deleteId = null;
     }
 
 
