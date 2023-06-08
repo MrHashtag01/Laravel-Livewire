@@ -8,6 +8,7 @@ use App\Models\Post;
 class Posts extends Component
 {
     public $posts, $title, $body, $post_id;
+    public $deleteId = null;
     public $updateMode = false;
    
     /**
@@ -100,14 +101,27 @@ class Posts extends Component
         $this->resetInputFields();
     }
    
+
+    public function deleteId($id)
+    {
+        $this->deleteId = $id;
+        
+    }
+
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    public function delete($id)
+    public function delete()
     {
-        Post::find($id)->delete();
+        
+        Post::find($this->deleteId);
+
         session()->flash('message', 'Post Deleted Successfully.');
+
     }
+
+
 }
